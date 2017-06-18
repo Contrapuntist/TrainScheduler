@@ -28,10 +28,13 @@ $(document).ready(function() {
   }
 
   $('#submit').on('click', function() {
-    event.preventdefault(); 
+ 
+    event.preventDefault(); 
+
+    console.log('submit clicked');
 
     trSched.trainName = $('#train-name').val().trim();
-    trSched.destinaton = $('#train-destination').val().trim();
+    trSched.destination = $('#train-destination').val().trim();
     trSched.firstTrain = $('#train-time').val().trim(); 
     trSched.frequency = $('#train-frequency').val().trim();
 
@@ -45,25 +48,24 @@ $(document).ready(function() {
       destination: trSched.destination,
       firstTrainTime: trSched.firstTrain,
       trainFrequency: trSched.frequency,
-
-    })
+    });
  
-  });
+  }); 
 
-  // database.ref().on("child_added", function(childSnapshot) { 
-  //     var name = childSnapshot.val().employeeName;    
-  //     var role = childSnapshot.val().employeeRole;
-  //     var stdate = childSnapshot.val().startDate;
-  //     var rate = childSnapshot.val().monthlyRate;
+  database.ref().on("child_added", function(childSnapshot) { 
+      var trName = childSnapshot.val().trainName;    
+      var trDestin = childSnapshot.val().destination;
+      var trTime = childSnapshot.val().firstTrainTime;
+      var trFreq = childSnapshot.val().trainFrequency;
       
+      var nxtTr = "35 min."
       
-      
-  //     var newRow = $("<tr>");
+      var newRow = $("<tr>");
        
-  //     newRow.html("<td>" + name + "</td><td>" + role + "</td><td>" + stdate + "</td><td>" + rate + "</td>");
+      newRow.html("<td>" + trName + "</td><td>" + trDestin + "</td><td>" + trFreq + "</td><td>" + trTime + "</td><td>" + nxtTr + "</td>");
       
-  //     $('#trains').append(newRow);     
-  // });
+      $('#trains').append(newRow);     
+  });
 
 
 });
