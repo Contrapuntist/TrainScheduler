@@ -23,7 +23,48 @@ $(document).ready(function() {
     trainName: null,
     destinaton: null,
     firstTrain: null,  
-    frequency: null, 
+    frequency: null,  
+    nextTrain: null,
+    minAway: null, 
+
+    trainTimeCalc: function( startTime , frequency) {
+      
+      var tFrequency = frequency;
+
+      // Time is 3:30 AM
+      var firstTime = startTime;
+
+      // First Time (pushed back 1 year to make sure it comes before current time)
+      var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+      console.log(firstTimeConverted);
+
+      // Current Time
+      var currentTime = moment();
+      console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+      // Difference between the times
+      var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+      console.log("DIFFERENCE IN TIME: " + diffTime);
+
+      // Time apart (remainder)
+      var tRemainder = diffTime % tFrequency;
+      console.log(tRemainder);
+
+      // Minute Until Train
+      var tMinutesTillTrain = tFrequency - tRemainder;
+      console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+      // Next Train
+      this.nextTrain = moment().add(tMinutesTillTrain, "minutes");
+      console.log("ARRIVAL TIME: " + moment(this.nextTrain).format("HH:mm"));
+
+      this.nextTrain = moment(this.nextTrain).format("HH:mm"); 
+      console.log(this.nextTrain); 
+
+      this.minAway = tMinutesTillTrain;
+      console.log(this.minAway);
+
+    }, 
   
   }
 
@@ -53,19 +94,77 @@ $(document).ready(function() {
   }); 
 
   database.ref().on("child_added", function(childSnapshot) { 
+      
+      // locale variable to pull date from firebase 
       var trName = childSnapshot.val().trainName;    
       var trDestin = childSnapshot.val().destination;
       var trTime = childSnapshot.val().firstTrainTime;
       var trFreq = childSnapshot.val().trainFrequency;
       
-      var nxtTr = "35 min."
+      // placeholder field for now
+
       
-      var newRow = $("<tr>");
-       
-      newRow.html("<td>" + trName + "</td><td>" + trDestin + "</td><td>" + trFreq + "</td><td>" + trTime + "</td><td>" + nxtTr + "</td>");
+      console.log(trTime);
+      console.log(trFreq);
+
+      // // Generatates new row
+      // var newRow = $("<tr>"); 
+      // newRow.html("<td>" + trName + "</td><td>" + trDestin + "</td><td>" + trFreq + "</td><td>" + trTime + "</td><td>" + nxtTr + "</td>");
       
-      $('#trains').append(newRow);     
+      // // adds row to table
+      // $('#trains').append(newRow);     
+    
+
+    // function trainTimeCalc () {
+      
+    // var tFrequency = trFreq;
+
+    // // Time is 3:30 AM
+    // var firstTime = trTime;
+
+    // // First Time (pushed back 1 year to make sure it comes before current time)
+    // var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+    // console.log(firstTimeConverted);
+
+    // // Current Time
+    // var currentTime = moment();
+    // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // // Difference between the times
+    // var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    // console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // // Time apart (remainder)
+    // var tRemainder = diffTime % tFrequency;
+    // console.log(tRemainder);
+
+    // // Minute Until Train
+    // var tMinutesTillTrain = tFrequency - tRemainder;
+    // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // // Next Train
+    // nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    // console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
+
+    // nextTrain = moment(nextTrain).format("HH:mm"); 
+    // console.log(nextTrain); 
+
+    // minAway = tMinutesTillTrain;
+    // console.log(minAway);
+
+    // } 
+    
+    trSched.trainTimeCalc(trTime, trFreq); 
+
+    var newRow = $("<tr>"); 
+    newRow.html("<td>" + trName + "</td><td>" + trDestin + "</td><td>" 
+      + trFreq + "</td><td>" + trSched.nextTrain + "</td><td>" + trSched.minAway + "</td>");
+    
+    // adds row to table
+    $('#trains').append(newRow);    
+
   });
+
 
 
 });
