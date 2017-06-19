@@ -36,33 +36,33 @@ $(document).ready(function() {
 
       // First Time (pushed back 1 year to make sure it comes before current time)
       var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
-      console.log(firstTimeConverted);
+      // console.log(firstTimeConverted);
 
       // Current Time
       var currentTime = moment();
-      console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+      // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
       // Difference between the times
       var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-      console.log("DIFFERENCE IN TIME: " + diffTime);
+      // console.log("DIFFERENCE IN TIME: " + diffTime);
 
       // Time apart (remainder)
       var tRemainder = diffTime % tFrequency;
-      console.log(tRemainder);
+      // console.log(tRemainder);
 
       // Minute Until Train
       var tMinutesTillTrain = tFrequency - tRemainder;
-      console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+      // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
       // Next Train
       this.nextTrain = moment().add(tMinutesTillTrain, "minutes");
-      console.log("ARRIVAL TIME: " + moment(this.nextTrain).format("HH:mm"));
+      // console.log("ARRIVAL TIME: " + moment(this.nextTrain).format("HH:mm"));
 
       this.nextTrain = moment(this.nextTrain).format("HH:mm"); 
-      console.log(this.nextTrain); 
+      // console.log(this.nextTrain); 
 
       this.minAway = tMinutesTillTrain;
-      console.log(this.minAway);
+      // console.log(this.minAway);
 
     }, 
   
@@ -158,13 +158,21 @@ $(document).ready(function() {
 
     var newRow = $("<tr>"); 
     newRow.html("<td>" + trName + "</td><td>" + trDestin + "</td><td>" 
-      + trFreq + "</td><td>" + trSched.nextTrain + "</td><td>" + trSched.minAway + "</td>");
+      + trFreq + "</td><td>" + trSched.nextTrain + "</td><td>" + trSched.minAway + 
+      "</td><td><button class='clearbox'>X</button></td>");
     
     // adds row to table
-    $('#trains').append(newRow);    
+    $('#trains').append(newRow);  
+
+
 
   });
 
+
+  $("#trains").on('click', '.clearbbox', function () {
+    $(this).closest('tr').remove();
+    console.log('delete button clicked');
+});
 
 
 });
