@@ -139,8 +139,11 @@ $(document).ready(function() {
     
 });
 
-
-$('.jumbotron').Velocity("transition.slideLeftin", { duration: 1500 });
+// Was trying to to test velocityjs to do some simple animations, but 
+// didn't get far.  Group project parameters include this library.  
+// so was using the homework to become acquainted with it. Still have a long way 
+// to go.
+$('.jumbotron').velocity("transition.slideLeftin", { duration: 1500 });
 
 });
 
