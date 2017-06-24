@@ -10,15 +10,13 @@ $(document).ready(function() {
 
   var rootRef = firebase.database().ref();
   var key = rootRef.key;  // key === null
-  console.log(rootRef);
-  console.log(key);
   
   // SECTION FOR TESTING MOMENT.JS 
-  function testmoment () { 
-    var timetest = moment();
-    console.log (timetest) 
-  } 
-  testmoment();  
+  // function testmoment () { 
+  //   var timetest = moment();
+  //   console.log (timetest) 
+  // } 
+  // testmoment();  
 
 
   // App object 
@@ -77,17 +75,17 @@ $(document).ready(function() {
  
     event.preventDefault(); 
 
-    console.log('submit clicked');
+    //console.log('submit clicked');
 
     trSched.trainName = $('#train-name').val().trim();
     trSched.destination = $('#train-destination').val().trim();
     trSched.firstTrain = $('#train-time').val().trim(); 
     trSched.frequency = $('#train-frequency').val().trim();
 
-    console.log(trSched.trainName);
-    console.log(trSched.destination);
-    console.log(trSched.firstTrain);
-    console.log(trSched.frequency); 
+    // console.log(trSched.trainName);
+    // console.log(trSched.destination);
+    // console.log(trSched.firstTrain);
+    // console.log(trSched.frequency); 
 
     database.ref().push({
       trainName: trSched.trainName, 
@@ -106,11 +104,11 @@ $(document).ready(function() {
       var trTime = childSnapshot.val().firstTrainTime;
       var trFreq = childSnapshot.val().trainFrequency;
       var datakey = childSnapshot.key;
-      console.log(datakey);
+      //console.log(datakey);
       // placeholder field for now
 
-      console.log(trTime);
-      console.log(trFreq);
+      //console.log(trTime);
+      //console.log(trFreq);
 
 
     trSched.trainTimeCalc(trTime, trFreq); 
@@ -140,8 +138,9 @@ $(document).ready(function() {
     // location.reload();
     
 });
- 
 
+
+$('.jumbotron').Velocity("transition.slideLeftin", { duration: 1500 });
 
 });
 

@@ -4,7 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Faster+One|Maven+Pro:400,500" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	
 	<!-- Meta tag for mobile viewing -->
@@ -27,7 +29,7 @@
 	            <table width="100%" border="0" cellpadding="0" class="table">
 	              
 	              <tbody id='trains'>
-	                <tr>
+	                <tr class="tstyle">
 	                  <td>Train Name</td>
 	                  <td>Destination</td>
 	                  <td>Frequency (min.)</td>
@@ -69,13 +71,11 @@
 	                  <input class="form-control" id="train-frequency" type="number">
 	                </div>
 
-	                <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+	                <button class="btn btn-danger" id="submit" type="submit">Submit</button>
 	            </div>
 	          </div>
 	        </div>
       	</div>	
-			
-
 		</div>
 
 	</div> 
@@ -85,6 +85,8 @@
 	<script type="text/javascript" src="javascript/config.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src='javascript/trainscheduler.js'></script> 
+	<script type="text/javascript" src='javascript/trainscheduler.js'></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.ui.js"></script>
 </body>
 </html>
